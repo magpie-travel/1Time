@@ -1,403 +1,584 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1Time.ai - Your Stories, Forever.</title>
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Custom CSS and Tailwind Configuration -->
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #050816;
-            color: #E2E8F0;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .gradient-text {
-            background: linear-gradient(90deg, #38bdf8, #a78bfa);
+        :root {
+            --bg-primary: #fafafa;
+            --bg-secondary: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --border: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(250, 250, 250, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-accent {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .cta-button {
+            background: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #f8fafc 100%);
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 8vw, 72px);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+
+        .hero-accent {
+            background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-fill-color: transparent;
-        }
-        
-        .hero-gradient {
-            background-image: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15) 0%, rgba(5, 8, 22, 0) 40%);
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .glass-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        .hero p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-weight: 400;
         }
 
-        .fade-in-section {
+        .hero-cta {
+            background: var(--accent);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-cta:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .features-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .features-header p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: var(--bg-primary);
+            padding: 40px 32px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border-hover);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 24px;
+            background: var(--accent);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background: var(--bg-primary);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto 40px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-content p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        .fade-in {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        .fade-in-section.is-visible {
+        .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
-        #mobile-menu {
-            transition: transform 0.3s ease-in-out;
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+
+            .hero {
+                padding: 100px 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .features {
+                padding: 60px 0;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .feature-card {
+                padding: 30px 24px;
+            }
+
+            .cta-section {
+                padding: 60px 0;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
         }
 
-        .use-case-section:nth-child(odd) {
-            background-color: rgba(17, 24, 39, 0.2); /* A subtle background for alternating sections */
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: var(--bg-secondary);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+            transition: right 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-primary);
         }
     </style>
 </head>
-<body class="overflow-x-hidden">
-
+<body>
     <!-- Header -->
-    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-        <div class="container mx-auto px-6 py-4">
-            <nav class="flex items-center justify-between">
-                <a href="#" class="text-2xl font-bold tracking-tighter">
-                    1Time<span class="gradient-text">.ai</span>
-                </a>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">1Time<span class="logo-accent">.ai</span></a>
                 
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#use-cases" class="hover:text-sky-400 transition-colors">Use Cases</a>
-                    <a href="#legacy-ai" class="hover:text-sky-400 transition-colors">Legacy AI</a>
-                    <a href="#pricing" class="hover:text-sky-400 transition-colors">Pricing</a>
-                </div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
                 
-                <a href="#" class="hidden md:block bg-sky-500 hover:bg-sky-600 text-white font-semibold px-5 py-2 rounded-lg transition-colors">
-                    Get Started Free
-                </a>
-
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-white focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                    </button>
-                </div>
+                <a href="#" class="cta-button">Get Started</a>
+                
+                <button class="mobile-menu-button" id="mobileMenuButton">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
             </nav>
         </div>
     </header>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-64 bg-slate-900/90 backdrop-blur-lg z-40 transform translate-x-full md:hidden">
-        <div class="flex flex-col items-center justify-center h-full space-y-8">
-            <a href="#use-cases" class="text-lg hover:text-sky-400 transition-colors mobile-menu-link">Use Cases</a>
-            <a href="#legacy-ai" class="text-lg hover:text-sky-400 transition-colors mobile-menu-link">Legacy AI</a>
-            <a href="#pricing" class="text-lg hover:text-sky-400 transition-colors mobile-menu-link">Pricing</a>
-            <a href="#" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors mt-4">
-                Get Started Free
-            </a>
-        </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">×</button>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#" class="cta-button">Get Started</a>
     </div>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 hero-gradient">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter mb-6 leading-tight">
-                    Your Story, <span class="gradient-text">Forever.</span>
-                </h1>
-                <p class="max-w-3xl mx-auto text-lg md:text-xl text-slate-300 mb-10">
-                    Capture your life's moments in your own voice. For your legacy, for your friends, for your future self. Don't let your memories fade—turn them into a timeless gift.
-                </p>
-                <div class="flex justify-center items-center space-x-4">
-                    <a href="#use-cases" class="bg-sky-500 hover:bg-sky-600 text-white font-bold text-lg px-8 py-4 rounded-xl transition-transform hover:scale-105">
-                        Explore What You Can Do
-                    </a>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Your Story, <span class="hero-accent">Forever.</span></h1>
+            <p>Capture life's moments in your own voice. Create a timeless legacy for your family, friends, and future self.</p>
+            <a href="#features" class="hero-cta">Start Your Story</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="features-header fade-in">
+                <h2>One Platform, Infinite Stories</h2>
+                <p>From preserving family legacy to capturing fleeting moments, 1Time.ai is designed for every chapter of your life.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📖</div>
+                    <h3>Legacy Archive</h3>
+                    <p>Preserve your life story and wisdom as a timeless gift. Our AI guides you through creating a rich autobiography for future generations.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">👥</div>
+                    <h3>Shared Memories</h3>
+                    <p>Relive stories with friends by recording different perspectives. We splice them together for the definitive version of your shared experiences.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎉</div>
+                    <h3>Living Guestbook</h3>
+                    <p>Create emotional audio guestbooks for weddings, birthdays, and special events. Share a QR code for guests to leave heartfelt messages.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Travel Stories</h3>
+                    <p>Build an interactive atlas of your adventures. Geotag voice notes and photos to create a rich, multi-sensory travel journal.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">⏰</div>
+                    <h3>Time Capsule</h3>
+                    <p>Record messages for your future self or loved ones. Lock memories in digital time capsules to be delivered at the perfect moment.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">💭</div>
+                    <h3>Dream Journal</h3>
+                    <p>Capture fleeting dream memories with instant voice recording. Our AI helps you discover patterns in your subconscious over time.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Use Cases Intro -->
-        <section id="use-cases" class="py-20">
-            <div class="container mx-auto px-6 text-center fade-in-section">
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">One Platform, Infinite Stories</h2>
-                <p class="max-w-2xl mx-auto mt-4 text-slate-400">
-                    From preserving a family legacy to reliving a wild college weekend, 1Time.ai is designed for every chapter of your life.
-                </p>
+    <!-- CTA Section -->
+    <section id="pricing" class="cta-section">
+        <div class="container">
+            <div class="fade-in">
+                <h2>Ready to Begin Your Story?</h2>
+                <p>The best time to start preserving your memories was yesterday. The second best time is now.</p>
+                <a href="#" class="hero-cta">Start for Free</a>
             </div>
-        </section>
-
-        <!-- Use Case 1: Legacy -->
-        <section class="use-case-section py-20 overflow-hidden">
-            <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="fade-in-section">
-                        <span class="text-sm font-bold text-violet-400 tracking-widest">LEGACY</span>
-                        <h3 class="text-3xl font-bold mt-2 mb-4">Craft Your Autobiography</h3>
-                        <p class="text-slate-300 text-lg">Preserve your life story, wisdom, and personality as a timeless gift. Our AI Interviewer guides you through your memories, creating a rich archive for your family to explore for generations.</p>
-                    </div>
-                    <div class="fade-in-section" style="transition-delay: 150ms;">
-                        <div class="glass-card rounded-2xl p-8">
-                            <h4 class="font-semibold mb-4 text-white">David's Timeline</h4>
-                            <div class="space-y-4">
-                                <div class="flex items-center">
-                                    <div class="w-4 h-4 rounded-full bg-violet-500 border-2 border-slate-700"></div>
-                                    <p class="ml-4 text-slate-300">1975: Meeting Grandma</p>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="w-4 h-4 rounded-full bg-violet-500 border-2 border-slate-700"></div>
-                                    <p class="ml-4 text-slate-300">1982: Biggest Risk I Ever Took</p>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="w-4 h-4 rounded-full bg-slate-600 border-2 border-slate-700"></div>
-                                    <p class="ml-4 text-slate-500 italic">Next Prompt: Your first job...</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Use Case 2: Friends -->
-        <section class="use-case-section py-20 overflow-hidden">
-            <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="md:order-2 fade-in-section">
-                        <span class="text-sm font-bold text-sky-400 tracking-widest">FRIENDS</span>
-                        <h3 class="text-3xl font-bold mt-2 mb-4">Relive Stories Together</h3>
-                        <p class="text-slate-300 text-lg">"Remember that one time...?" Stop just asking the question. Invite your friends to a shared memory and record your different perspectives. The app splices them together for a hilarious, definitive version of the story.</p>
-                    </div>
-                    <div class="md:order-1 fade-in-section" style="transition-delay: 150ms;">
-                        <div class="glass-card rounded-2xl p-8">
-                            <h4 class="font-semibold mb-4 text-white">Memory: College Dorm '08</h4>
-                            <div class="relative h-24">
-                                <img src="https://placehold.co/50x50/38bdf8/ffffff?text=A" alt="Avatar A" class="w-12 h-12 rounded-full absolute top-0 left-10 border-2 border-slate-900">
-                                <img src="https://placehold.co/50x50/a78bfa/ffffff?text=B" alt="Avatar B" class="w-16 h-16 rounded-full absolute top-8 left-20 border-2 border-slate-900">
-                                <img src="https://placehold.co/50x50/34d399/ffffff?text=C" alt="Avatar C" class="w-10 h-10 rounded-full absolute top-5 right-12 border-2 border-slate-900">
-                            </div>
-                            <p class="text-center text-slate-400 italic mt-4">"4 friends added their version..."</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Use Case 3: Life Events -->
-        <section class="use-case-section py-20 overflow-hidden">
-            <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="fade-in-section">
-                        <span class="text-sm font-bold text-emerald-400 tracking-widest">LIFE EVENTS</span>
-                        <h3 class="text-3xl font-bold mt-2 mb-4">The Living Guestbook</h3>
-                        <p class="text-slate-300 text-lg">At your next wedding, birthday, or anniversary, share a simple QR code. Guests can scan it to leave a heartfelt voice message, creating an emotional audio-guestbook you can listen to for years to come.</p>
-                    </div>
-                    <div class="fade-in-section" style="transition-delay: 150ms;">
-                        <div class="glass-card rounded-2xl p-8 flex flex-col items-center text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 256 256"><path d="M184,184v24a4,4,0,0,1-8,0V184h-24a4,4,0,0,1,0-8h24v-24a4,4,0,0,1,8,0v24h24a4,4,0,0,1,0,8ZM88,152v-8a4,4,0,0,0-8,0v8a4,4,0,0,0,8,0Zm40-8a4,4,0,0,0-4,4v8a4,4,0,0,0,8,0v-8A4,4,0,0,0,128,144Zm-76,8a4,4,0,0,0,4-4v-8a4,4,0,0,0-8,0v8A4,4,0,0,0,52,152Zm160-96H176a4,4,0,0,0-4,4V96h-36V60a4,4,0,0,0-4-4H96a4,4,0,0,0-4,4V96H56V60a4,4,0,0,0-4-4H16A12,12,0,0,0,4,68V204a12,12,0,0,0,12,12H96v-8a4,4,0,0,1,8,0v8h36v-8a4,4,0,0,1,8,0v8h36v-8a4,4,0,0,1,8,0v8h12a12,12,0,0,0,12-12V68A12,12,0,0,0,212,56Zm-4,148H16V68H44V96a4,4,0,0,0,4,4h44a4,4,0,0,0,4-4V68h32V96a4,4,0,0,0,4,4h44a4,4,0,0,0,4-4V68h28Z"></path></svg>
-                            <p class="mt-4 font-semibold text-white">Scan to leave a memory for the newlyweds!</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Use Case 4: Travel -->
-        <section class="use-case-section py-20 overflow-hidden">
-            <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="md:order-2 fade-in-section">
-                        <span class="text-sm font-bold text-amber-400 tracking-widest">TRAVEL</span>
-                        <h3 class="text-3xl font-bold mt-2 mb-4">Your Storyteller's Atlas</h3>
-                        <p class="text-slate-300 text-lg">Create a rich, multi-sensory travel journal. Geotag your voice notes and photos to build an interactive map of your adventures. Relive not just where you went, but how you felt in that exact moment.</p>
-                    </div>
-                    <div class="md:order-1 fade-in-section" style="transition-delay: 150ms;">
-                        <div class="glass-card rounded-2xl p-8 relative aspect-video bg-cover bg-center" style="background-image: url('https://placehold.co/600x400/050816/1f2937?text=')">
-                             <div class="absolute top-1/4 left-1/3">
-                                <div class="w-3 h-3 bg-amber-400 rounded-full animate-ping"></div>
-                                <div class="w-3 h-3 bg-amber-400 rounded-full absolute top-0 left-0"></div>
-                            </div>
-                            <div class="absolute top-1/2 left-3/4">
-                                <div class="w-3 h-3 bg-amber-400 rounded-full animate-ping"></div>
-                                <div class="w-3 h-3 bg-amber-400 rounded-full absolute top-0 left-0"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Use Case 5: Entertainment -->
-        <section class="use-case-section py-20 overflow-hidden">
-            <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="fade-in-section">
-                        <span class="text-sm font-bold text-rose-400 tracking-widest">ENTERTAINMENT</span>
-                        <h3 class="text-3xl font-bold mt-2 mb-4">Capture the Vibe</h3>
-                        <p class="text-slate-300 text-lg">Join a public "Memory Wall" at your next concert, festival, or game. Share your real-time reactions and contribute to a collective story of the event's atmosphere. A new way for fans to connect and sponsors to engage.</p>
-                    </div>
-                    <div class="fade-in-section" style="transition-delay: 150ms;">
-                        <div class="glass-card rounded-2xl p-6 -rotate-3">
-                            <div class="border-2 border-dashed border-slate-600 rounded-xl p-4 text-center">
-                                <p class="font-bold text-rose-400">LIVE EVENT</p>
-                                <h4 class="text-2xl font-extrabold text-white my-2">MUSIC FEST 2025</h4>
-                                <p class="text-sm text-slate-400">MEMORY WALL: ACTIVE</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Use Case 6: Saving Stories -->
-        <section class="use-case-section py-20 overflow-hidden">
-            <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="md:order-2 fade-in-section">
-                        <span class="text-sm font-bold text-cyan-400 tracking-widest">TIME CAPSULE</span>
-                        <h3 class="text-3xl font-bold mt-2 mb-4">A Message to the Future</h3>
-                        <p class="text-slate-300 text-lg">Record advice for your kids, a note to your future self, or a story you want a loved one to hear on a specific date. Lock your memory in a digital time capsule and we'll deliver it at the perfect moment.</p>
-                    </div>
-                    <div class="md:order-1 fade-in-section" style="transition-delay: 150ms;">
-                        <div class="glass-card rounded-2xl p-8 flex flex-col items-center text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.125-.504 1.125-1.125V14.25m-17.25 4.5v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A1.125 1.125 0 012.25 6h19.5a1.125 1.125 0 011.125 1.125v1.5a1.125 1.125 0 01-1.125 1.125h-1.5a3.375 3.375 0 00-3.375 3.375v1.875m-17.25 4.5a3.375 3.375 0 003.375-3.375h1.5a1.125 1.125 0 011.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125H3.375m17.25 0a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 00-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125h1.125" /></svg>
-                            <p class="mt-4 font-semibold text-white">To: Future Me</p>
-                            <p class="text-sm text-slate-400">Deliver on: July 13, 2030</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Use Case 7: Dreams -->
-        <section class="use-case-section py-20 overflow-hidden">
-            <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="fade-in-section">
-                        <span class="text-sm font-bold text-indigo-400 tracking-widest">DREAMS</span>
-                        <h3 class="text-3xl font-bold mt-2 mb-4">Journal Your Subconscious</h3>
-                        <p class="text-slate-300 text-lg">Capture fleeting dream memories the moment you wake up with instant voice recording. Our AI automatically transcribes and tags key themes, helping you discover patterns in your subconscious over time.</p>
-                    </div>
-                    <div class="fade-in-section" style="transition-delay: 150ms;">
-                        <div class="glass-card rounded-2xl p-8 relative overflow-hidden aspect-video">
-                            <!-- Starry background effect -->
-                            <div class="absolute inset-0" id="stars"></div>
-                            <div class="relative z-10">
-                                <p class="text-white">Dream Log: July 13, 2025</p>
-                                <p class="text-slate-300 italic mt-2">"...I was flying over an ocean of purple sand, and I saw a locked door floating in the sky..."</p>
-                                <div class="mt-4 flex flex-wrap gap-2">
-                                    <span class="bg-indigo-500/20 text-indigo-300 text-xs font-medium px-2.5 py-0.5 rounded-full">flying</span>
-                                    <span class="bg-indigo-500/20 text-indigo-300 text-xs font-medium px-2.5 py-0.5 rounded-full">ocean</span>
-                                    <span class="bg-indigo-500/20 text-indigo-300 text-xs font-medium px-2.5 py-0.5 rounded-full">anxiety</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Final CTA (Re-uses pricing section ID for navigation) -->
-        <section id="pricing" class="py-20">
-            <div class="container mx-auto px-6 text-center fade-in-section">
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Ready to Begin Your Story?</h2>
-                <p class="max-w-2xl mx-auto mt-4 text-slate-400 mb-8">
-                    The best time to plant a tree was 20 years ago. The second best time is now. The same is true for your legacy.
-                </p>
-                <a href="#" class="bg-sky-500 hover:bg-sky-600 text-white font-bold text-lg px-8 py-4 rounded-xl transition-transform hover:scale-105">
-                    Start for Free
-                </a>
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800 mt-20">
-        <div class="container mx-auto px-6 py-8">
-            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                <p class="text-slate-400">&copy; 2025 1Time.ai Inc. All rights reserved.</p>
-                <div class="flex space-x-6 text-slate-400">
-                    <a href="#" class="hover:text-white transition-colors">Twitter</a>
-                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 1Time.ai Inc. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- Header Scroll Effect ---
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('bg-slate-900/80', 'backdrop-blur-lg', 'shadow-lg');
-                } else {
-                    header.classList.remove('bg-slate-900/80', 'backdrop-blur-lg', 'shadow-lg');
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
+        });
 
-            // --- Mobile Menu Toggle ---
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
-            function closeMenu() {
-                mobileMenu.classList.add('translate-x-full');
-            }
-            function openMenu() {
-                mobileMenu.classList.remove('translate-x-full');
-            }
-            mobileMenuButton.addEventListener('click', () => {
-                if (mobileMenu.classList.contains('translate-x-full')) {
-                    openMenu();
-                } else {
-                    closeMenu();
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
             });
-            mobileMenuLinks.forEach(link => link.addEventListener('click', closeMenu));
+        }, observerOptions);
 
-            // --- Fade-in on Scroll Animation ---
-            const sections = document.querySelectorAll('.fade-in-section');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            sections.forEach(section => observer.observe(section));
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
 
-            // --- Starry background for Dreams section ---
-            const starsContainer = document.getElementById('stars');
-            if (starsContainer) {
-                for (let i = 0; i < 50; i++) {
-                    let star = document.createElement('div');
-                    star.className = 'absolute bg-white rounded-full';
-                    let size = Math.random() * 2 + 1;
-                    star.style.width = `${size}px`;
-                    star.style.height = `${size}px`;
-                    star.style.top = `${Math.random() * 100}%`;
-                    star.style.left = `${Math.random() * 100}%`;
-                    star.style.opacity = `${Math.random() * 0.5 + 0.2}`;
-                    star.style.animation = `twinkle ${Math.random() * 5 + 3}s infinite alternate`;
-                    starsContainer.appendChild(star);
-                }
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 1px 3px 0 rgb(0 0 0 / 0.1)';
+            } else {
+                header.style.background = 'rgba(250, 250, 250, 0.8)';
+                header.style.boxShadow = 'none';
             }
         });
     </script>
-    <style>
-        @keyframes twinkle {
-            from { opacity: 0.2; }
-            to { opacity: 0.8; }
-        }
-    </style>
-
 </body>
 </html>
