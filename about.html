@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About 1Time.ai - Our Story & Mission</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --border: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-accent {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .cta-button {
+            background: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* Page Header Section */
+        .page-header {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
+
+        .page-header h1 {
+            font-size: clamp(40px, 8vw, 60px);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+
+        .hero-accent {
+            background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-weight: 400;
+        }
+
+        /* Generic Section Styling */
+        .section {
+            padding: 80px 0;
+        }
+        .section-bg {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        .section-header p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Two-column layout */
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+        .mission-text p {
+            margin-bottom: 1.5rem;
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        .mission-image {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            object-fit: cover;
+        }
+
+        /* Case Studies */
+        .case-studies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+        .case-study-card {
+            background: var(--bg-primary);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+        .case-study-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border-hover);
+        }
+        .case-study-card blockquote {
+            font-size: 18px;
+            font-style: italic;
+            color: var(--text-primary);
+            border-left: 3px solid var(--accent);
+            padding-left: 24px;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+        .case-study-author {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .case-study-author img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+        }
+        .case-study-author h4 {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .case-study-author p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-content p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-links, .cta-button {
+                display: none;
+            }
+            .mobile-menu-button {
+                display: block;
+            }
+            .page-header {
+                padding: 100px 0 60px;
+            }
+            .two-col-grid {
+                grid-template-columns: 1fr;
+            }
+            .mission-image {
+                order: -1;
+            }
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: var(--bg-primary);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+            transition: right 0.3s ease-in-out;
+        }
+        .mobile-menu.active {
+            right: 0;
+        }
+        .mobile-menu a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 500;
+        }
+        .mobile-menu-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            border: none;
+            font-size: 32px;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo">1Time<span class="logo-accent">.ai</span></a>
+                
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#mission">Our Mission</a></li>
+                    <li><a href="#case-studies">Case Studies</a></li>
+                </ul>
+                
+                <a href="index.html#pricing" class="cta-button">Get Started</a>
+                
+                <button class="mobile-menu-button" id="mobileMenuButton">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">&times;</button>
+        <a href="index.html">Home</a>
+        <a href="#mission">Our Mission</a>
+        <a href="#case-studies">Case Studies</a>
+        <a href="index.html#pricing" class="cta-button">Get Started</a>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container fade-in">
+            <h1>Why <span class="hero-accent">Memory</span> Matters</h1>
+            <p>We are the sum of our experiences. Our memories shape our identity, connect us to each other, and guide our future. At 1Time.ai, we believe these stories are the most valuable things we own.</p>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section id="mission" class="section">
+        <div class="container">
+            <div class="two-col-grid">
+                <div class="mission-text fade-in">
+                    <h2 style="font-size: 36px; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.02em;">Our Mission: To Preserve the Human Experience</h2>
+                    <p>In a world of fleeting digital content, what truly lasts? We built 1Time.ai because we saw memories being lost—stories untold, voices forgotten, wisdom unshared.</p>
+                    <p>A photo album is beautiful, but it can't tell you the story behind the smiles. A social media post is temporary, but the feeling of a moment should be timeless.</p>
+                    <p>Our mission is to provide a sanctuary for your memories. A place where technology doesn't just store data, but deepens connection. We're using AI not to replace humanity, but to amplify it, ensuring that the essence of who you are can be experienced, shared, and cherished forever.</p>
+                </div>
+                <div class="fade-in">
+                    <img src="https://placehold.co/600x700/e2e8f0/475569?text=Connection" alt="Abstract representation of memories and connection" class="mission-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section id="case-studies" class="section section-bg">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Stories That Live On</h2>
+                <p>See how people are using 1Time.ai to change the way they remember.</p>
+            </div>
+            
+            <div class="case-studies-grid">
+                <div class="case-study-card fade-in">
+                    <blockquote>"I never met my grandfather. But last night, I asked him for advice. And he answered. It's the most incredible gift my family has ever received."</blockquote>
+                    <div class="case-study-author">
+                        <img src="https://placehold.co/100x100/8b5cf6/ffffff?text=S" alt="Sarah's Avatar">
+                        <div>
+                            <h4>Sarah L.</h4>
+                            <p>Connecting with her Grandfather's Legacy AI</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="case-study-card fade-in">
+                    <blockquote>"We always argued about how we *really* ended up on that road trip to Mexico. Turns out, we were all wrong. Hearing our four different versions spliced together was the hardest I've laughed in years."</blockquote>
+                    <div class="case-study-author">
+                        <img src="https://placehold.co/100x100/3b82f6/ffffff?text=M" alt="Mike's Avatar">
+                        <div>
+                            <h4>Mike R.</h4>
+                            <p>Reliving college memories with friends</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="case-study-card fade-in">
+                    <blockquote>"Our wedding guestbook has signatures. Our 'Living Guestbook' has my grandmother's laugh, our best man's terrible joke, and my dad's shaky, heartfelt advice. It's priceless."</blockquote>
+                    <div class="case-study-author">
+                        <img src="https://placehold.co/100x100/10b981/ffffff?text=E" alt="Emily's Avatar">
+                        <div>
+                            <h4>Emily & Tom</h4>
+                            <p>Celebrating their first anniversary</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ethics Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Our Commitment to You</h2>
+                <p>Your memories are your most personal data. We consider ourselves their guardians, not their owners. Our platform is built on a foundation of absolute privacy, security, and user control. Your trust is not just important to us; it is our entire business model.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 1Time.ai Inc. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.add('active'));
+        mobileMenuClose.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        });
+
+        // Fade in animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 20) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = 'var(--shadow)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.8)';
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
