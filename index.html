@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1Time.ai - Your Story, Forever.</title>
+    <title>1Time.ai - Your Stories, Forever.</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -15,14 +15,12 @@
     
     <!-- Custom CSS and Tailwind Configuration -->
     <style>
-        /* Custom styles and overrides */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #050816; /* A very dark, deep blue */
-            color: #E2E8F0; /* A soft off-white */
+            background-color: #050816;
+            color: #E2E8F0;
         }
 
-        /* Gradient text effect */
         .gradient-text {
             background: linear-gradient(90deg, #38bdf8, #a78bfa);
             -webkit-background-clip: text;
@@ -31,20 +29,22 @@
             text-fill-color: transparent;
         }
         
-        /* Hero background gradient */
         .hero-gradient {
             background-image: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15) 0%, rgba(5, 8, 22, 0) 40%);
         }
 
-        /* Glassmorphism effect for cards */
         .glass-card {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        /* Fade-in animation on scroll */
         .fade-in-section {
             opacity: 0;
             transform: translateY(20px);
@@ -56,9 +56,12 @@
             transform: translateY(0);
         }
         
-        /* Mobile Nav Toggle */
         #mobile-menu {
             transition: transform 0.3s ease-in-out;
+        }
+
+        .use-case-section:nth-child(odd) {
+            background-color: rgba(17, 24, 39, 0.2); /* A subtle background for alternating sections */
         }
     </style>
 </head>
@@ -68,25 +71,20 @@
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <div class="container mx-auto px-6 py-4">
             <nav class="flex items-center justify-between">
-                <!-- Logo -->
                 <a href="#" class="text-2xl font-bold tracking-tighter">
                     1Time<span class="gradient-text">.ai</span>
                 </a>
                 
-                <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#features" class="hover:text-sky-400 transition-colors">Features</a>
+                    <a href="#use-cases" class="hover:text-sky-400 transition-colors">Use Cases</a>
                     <a href="#legacy-ai" class="hover:text-sky-400 transition-colors">Legacy AI</a>
                     <a href="#pricing" class="hover:text-sky-400 transition-colors">Pricing</a>
-                    <a href="#ethics" class="hover:text-sky-400 transition-colors">Ethics</a>
                 </div>
                 
-                <!-- CTA Button -->
                 <a href="#" class="hidden md:block bg-sky-500 hover:bg-sky-600 text-white font-semibold px-5 py-2 rounded-lg transition-colors">
-                    Sign Up Free
+                    Get Started Free
                 </a>
 
-                <!-- Mobile Menu Button -->
                 <div class="md:hidden">
                     <button id="mobile-menu-button" class="text-white focus:outline-none">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
@@ -99,12 +97,11 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="fixed top-0 right-0 h-full w-64 bg-slate-900/90 backdrop-blur-lg z-40 transform translate-x-full md:hidden">
         <div class="flex flex-col items-center justify-center h-full space-y-8">
-            <a href="#features" class="text-lg hover:text-sky-400 transition-colors mobile-menu-link">Features</a>
+            <a href="#use-cases" class="text-lg hover:text-sky-400 transition-colors mobile-menu-link">Use Cases</a>
             <a href="#legacy-ai" class="text-lg hover:text-sky-400 transition-colors mobile-menu-link">Legacy AI</a>
             <a href="#pricing" class="text-lg hover:text-sky-400 transition-colors mobile-menu-link">Pricing</a>
-            <a href="#ethics" class="text-lg hover:text-sky-400 transition-colors mobile-menu-link">Ethics</a>
             <a href="#" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors mt-4">
-                Sign Up Free
+                Get Started Free
             </a>
         </div>
     </div>
@@ -117,94 +114,51 @@
                     Your Story, <span class="gradient-text">Forever.</span>
                 </h1>
                 <p class="max-w-3xl mx-auto text-lg md:text-xl text-slate-300 mb-10">
-                    Capture your life's moments in your own voice. Create an interactive legacy that connects generations. Don't let your memories fade—turn them into a timeless gift.
+                    Capture your life's moments in your own voice. For your legacy, for your friends, for your future self. Don't let your memories fade—turn them into a timeless gift.
                 </p>
                 <div class="flex justify-center items-center space-x-4">
-                    <a href="#" class="bg-sky-500 hover:bg-sky-600 text-white font-bold text-lg px-8 py-4 rounded-xl transition-transform hover:scale-105">
-                        Start Your Legacy Today
+                    <a href="#use-cases" class="bg-sky-500 hover:bg-sky-600 text-white font-bold text-lg px-8 py-4 rounded-xl transition-transform hover:scale-105">
+                        Explore What You Can Do
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Features Section -->
-        <section id="features" class="py-20">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16 fade-in-section">
-                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight">A Living Autobiography</h2>
-                    <p class="max-w-2xl mx-auto mt-4 text-slate-400">
-                        Go beyond a simple journal. 1Time.ai is an intelligent platform that understands your life's narrative.
-                    </p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Feature 1: Capture -->
-                    <div class="glass-card p-8 rounded-2xl text-center fade-in-section" style="transition-delay: 100ms;">
-                        <div class="inline-block bg-sky-500/10 p-4 rounded-xl mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Capture with Voice</h3>
-                        <p class="text-slate-400">Effortlessly record memories, stories, and thoughts in your own voice. Our AI transcribes and organizes everything for you.</p>
-                    </div>
-                    <!-- Feature 2: Collaborate -->
-                    <div class="glass-card p-8 rounded-2xl text-center fade-in-section" style="transition-delay: 200ms;">
-                        <div class="inline-block bg-violet-500/10 p-4 rounded-xl mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Collaborate with Family</h3>
-                        <p class="text-slate-400">Invite loved ones to add their perspective to shared memories. Build a rich, multi-faceted family history together.</p>
-                    </div>
-                    <!-- Feature 3: Search -->
-                    <div class="glass-card p-8 rounded-2xl text-center fade-in-section" style="transition-delay: 300ms;">
-                        <div class="inline-block bg-emerald-500/10 p-4 rounded-xl mb-4">
-                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Rediscover Moments</h3>
-                        <p class="text-slate-400">Instantly find any memory. Search for people, places, or feelings and let our Memory Graph connect the dots.</p>
-                    </div>
-                </div>
+        <!-- Use Cases Intro -->
+        <section id="use-cases" class="py-20">
+            <div class="container mx-auto px-6 text-center fade-in-section">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">One Platform, Infinite Stories</h2>
+                <p class="max-w-2xl mx-auto mt-4 text-slate-400">
+                    From preserving a family legacy to reliving a wild college weekend, 1Time.ai is designed for every chapter of your life.
+                </p>
             </div>
         </section>
-        
-        <!-- Legacy AI Section -->
-        <section id="legacy-ai" class="py-20">
+
+        <!-- Use Case 1: Legacy -->
+        <section class="use-case-section py-20 overflow-hidden">
             <div class="container mx-auto px-6">
                 <div class="grid md:grid-cols-2 gap-12 items-center">
                     <div class="fade-in-section">
-                        <span class="text-sky-400 font-semibold">THE FUTURE OF LEGACY</span>
-                        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mt-2 mb-4">Meet Your Legacy AI</h2>
-                        <p class="text-slate-300 text-lg mb-6">This is more than an archive. It's a living continuation of your story. We create an interactive AI persona from your memories, allowing future generations to ask questions and hear your stories, in your voice, long after you're gone.</p>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <svg class="h-6 w-6 text-sky-400 mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <span><strong class="text-white">Conversational Q&A:</strong> Your family can ask "What was grandpa's best advice?" and get a real answer.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="h-6 w-6 text-sky-400 mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <span><strong class="text-white">Authentic Voice:</strong> Using advanced voice cloning, the AI responds in a tone that is unmistakably yours.</span>
-                            </li>
-                             <li class="flex items-start">
-                                <svg class="h-6 w-6 text-sky-400 mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <span><strong class="text-white">Evolving Personality:</strong> The more memories you add, the richer and more nuanced your Legacy AI becomes.</span>
-                            </li>
-                        </ul>
+                        <span class="text-sm font-bold text-violet-400 tracking-widest">LEGACY</span>
+                        <h3 class="text-3xl font-bold mt-2 mb-4">Craft Your Autobiography</h3>
+                        <p class="text-slate-300 text-lg">Preserve your life story, wisdom, and personality as a timeless gift. Our AI Interviewer guides you through your memories, creating a rich archive for your family to explore for generations.</p>
                     </div>
-                     <div class="fade-in-section" style="transition-delay: 200ms;">
-                        <!-- Placeholder for a cool visual, e.g., an abstract neural network or soundwave graphic -->
-                        <div class="glass-card rounded-2xl p-8 aspect-square flex items-center justify-center">
-                            <div class="text-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-sky-400/50 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                                </svg>
-                                <p class="mt-4 text-slate-400">"Tell me about the day you met grandma."</p>
-                                <div class="w-full h-px bg-slate-700 my-6"></div>
-                                <p class="text-white italic">"Ah, that day... It was raining, and she was carrying a stack of books..."</p>
-                                <p class="text-xs text-sky-400 mt-4">[Response generated by Legacy AI in John's voice]</p>
+                    <div class="fade-in-section" style="transition-delay: 150ms;">
+                        <div class="glass-card rounded-2xl p-8">
+                            <h4 class="font-semibold mb-4 text-white">David's Timeline</h4>
+                            <div class="space-y-4">
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 rounded-full bg-violet-500 border-2 border-slate-700"></div>
+                                    <p class="ml-4 text-slate-300">1975: Meeting Grandma</p>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 rounded-full bg-violet-500 border-2 border-slate-700"></div>
+                                    <p class="ml-4 text-slate-300">1982: Biggest Risk I Ever Took</p>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 rounded-full bg-slate-600 border-2 border-slate-700"></div>
+                                    <p class="ml-4 text-slate-500 italic">Next Prompt: Your first job...</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -212,81 +166,146 @@
             </div>
         </section>
 
-        <!-- Pricing Section -->
-        <section id="pricing" class="py-20 bg-slate-900/50">
+        <!-- Use Case 2: Friends -->
+        <section class="use-case-section py-20 overflow-hidden">
             <div class="container mx-auto px-6">
-                <div class="text-center mb-16 fade-in-section">
-                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Find the Perfect Plan</h2>
-                    <p class="max-w-2xl mx-auto mt-4 text-slate-400">
-                        Start for free. Upgrade when you're ready to build your complete legacy.
-                    </p>
-                </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                    <!-- Free Plan -->
-                    <div class="glass-card p-8 rounded-2xl flex flex-col fade-in-section" style="transition-delay: 100ms;">
-                        <h3 class="text-xl font-bold">Explorer</h3>
-                        <p class="text-4xl font-bold my-4">$0</p>
-                        <p class="text-slate-400 mb-6">A great place to start your journey.</p>
-                        <ul class="space-y-3 text-slate-300 flex-grow">
-                            <li class="flex items-center"><svg class="h-5 w-5 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Up to 50 memories</li>
-                            <li class="flex items-center"><svg class="h-5 w-5 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Voice & Text Capture</li>
-                            <li class="flex items-center"><svg class="h-5 w-5 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Basic Sharing</li>
-                        </ul>
-                        <a href="#" class="mt-8 block w-full text-center bg-slate-700 hover:bg-slate-600 text-white font-semibold py-3 rounded-lg transition-colors">Get Started</a>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="md:order-2 fade-in-section">
+                        <span class="text-sm font-bold text-sky-400 tracking-widest">FRIENDS</span>
+                        <h3 class="text-3xl font-bold mt-2 mb-4">Relive Stories Together</h3>
+                        <p class="text-slate-300 text-lg">"Remember that one time...?" Stop just asking the question. Invite your friends to a shared memory and record your different perspectives. The app splices them together for a hilarious, definitive version of the story.</p>
                     </div>
-                    
-                    <!-- Premium Plan -->
-                    <div class="glass-card p-8 rounded-2xl flex flex-col border-2 border-sky-500 relative fade-in-section" style="transition-delay: 200ms;">
-                        <span class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-full">MOST POPULAR</span>
-                        <h3 class="text-xl font-bold">Legacy Premium</h3>
-                        <p class="text-4xl font-bold my-4">$99<span class="text-lg text-slate-400">/year</span></p>
-                        <p class="text-slate-400 mb-6">Unlock the full power of your story.</p>
-                        <ul class="space-y-3 text-slate-300 flex-grow">
-                            <li class="flex items-center"><svg class="h-5 w-5 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Unlimited Memories</li>
-                            <li class="flex items-center"><svg class="h-5 w-5 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>AI Interviewer</li>
-                            <li class="flex items-center"><svg class="h-5 w-5 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Family Collaboration</li>
-                            <li class="flex items-center"><svg class="h-5 w-5 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Advanced Search</li>
-                        </ul>
-                        <a href="#" class="mt-8 block w-full text-center bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 rounded-lg transition-colors">Choose Premium</a>
-                    </div>
-
-                    <!-- Legacy AI Plan -->
-                    <div class="glass-card p-8 rounded-2xl flex flex-col fade-in-section" style="transition-delay: 300ms;">
-                        <h3 class="text-xl font-bold">Legacy AI</h3>
-                        <p class="text-4xl font-bold my-4">$299<span class="text-lg text-slate-400"> one-time</span></p>
-                        <p class="text-slate-400 mb-6">Create your interactive AI persona.</p>
-                         <ul class="space-y-3 text-slate-300 flex-grow">
-                            <li class="flex items-center"><svg class="h-5 w-5 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Includes all Premium features</li>
-                            <li class="flex items-center"><svg class="h-5 w-5 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Interactive AI Persona</li>
-                            <li class="flex items-center"><svg class="h-5 w-5 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Authentic Voice Cloning</li>
-                            <li class="flex items-center"><svg class="h-5 w-5 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Lifetime Hosting</li>
-                        </ul>
-                        <a href="#" class="mt-8 block w-full text-center bg-slate-700 hover:bg-slate-600 text-white font-semibold py-3 rounded-lg transition-colors">Create Your AI</a>
+                    <div class="md:order-1 fade-in-section" style="transition-delay: 150ms;">
+                        <div class="glass-card rounded-2xl p-8">
+                            <h4 class="font-semibold mb-4 text-white">Memory: College Dorm '08</h4>
+                            <div class="relative h-24">
+                                <img src="https://placehold.co/50x50/38bdf8/ffffff?text=A" alt="Avatar A" class="w-12 h-12 rounded-full absolute top-0 left-10 border-2 border-slate-900">
+                                <img src="https://placehold.co/50x50/a78bfa/ffffff?text=B" alt="Avatar B" class="w-16 h-16 rounded-full absolute top-8 left-20 border-2 border-slate-900">
+                                <img src="https://placehold.co/50x50/34d399/ffffff?text=C" alt="Avatar C" class="w-10 h-10 rounded-full absolute top-5 right-12 border-2 border-slate-900">
+                            </div>
+                            <p class="text-center text-slate-400 italic mt-4">"4 friends added their version..."</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Ethics Section -->
-        <section id="ethics" class="py-20">
-            <div class="container mx-auto px-6 text-center fade-in-section">
-                <div class="inline-block bg-emerald-500/10 p-4 rounded-xl mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
+        <!-- Use Case 3: Life Events -->
+        <section class="use-case-section py-20 overflow-hidden">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="fade-in-section">
+                        <span class="text-sm font-bold text-emerald-400 tracking-widest">LIFE EVENTS</span>
+                        <h3 class="text-3xl font-bold mt-2 mb-4">The Living Guestbook</h3>
+                        <p class="text-slate-300 text-lg">At your next wedding, birthday, or anniversary, share a simple QR code. Guests can scan it to leave a heartfelt voice message, creating an emotional audio-guestbook you can listen to for years to come.</p>
+                    </div>
+                    <div class="fade-in-section" style="transition-delay: 150ms;">
+                        <div class="glass-card rounded-2xl p-8 flex flex-col items-center text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 256 256"><path d="M184,184v24a4,4,0,0,1-8,0V184h-24a4,4,0,0,1,0-8h24v-24a4,4,0,0,1,8,0v24h24a4,4,0,0,1,0,8ZM88,152v-8a4,4,0,0,0-8,0v8a4,4,0,0,0,8,0Zm40-8a4,4,0,0,0-4,4v8a4,4,0,0,0,8,0v-8A4,4,0,0,0,128,144Zm-76,8a4,4,0,0,0,4-4v-8a4,4,0,0,0-8,0v8A4,4,0,0,0,52,152Zm160-96H176a4,4,0,0,0-4,4V96h-36V60a4,4,0,0,0-4-4H96a4,4,0,0,0-4,4V96H56V60a4,4,0,0,0-4-4H16A12,12,0,0,0,4,68V204a12,12,0,0,0,12,12H96v-8a4,4,0,0,1,8,0v8h36v-8a4,4,0,0,1,8,0v8h36v-8a4,4,0,0,1,8,0v8h12a12,12,0,0,0,12-12V68A12,12,0,0,0,212,56Zm-4,148H16V68H44V96a4,4,0,0,0,4,4h44a4,4,0,0,0,4-4V68h32V96a4,4,0,0,0,4,4h44a4,4,0,0,0,4-4V68h28Z"></path></svg>
+                            <p class="mt-4 font-semibold text-white">Scan to leave a memory for the newlyweds!</p>
+                        </div>
+                    </div>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Your Trust is Our Foundation</h2>
-                <p class="max-w-3xl mx-auto mt-4 text-slate-400 mb-8">
-                    We handle your most precious data—your memories. Our commitment to privacy and security is absolute. You own your data, always. We are simply its trusted guardian.
-                </p>
-                <a href="#" class="text-sky-400 hover:text-sky-300 font-semibold">
-                    Read Our Ethics Pledge &rarr;
-                </a>
             </div>
         </section>
 
-        <!-- Final CTA -->
-        <section class="py-20">
+        <!-- Use Case 4: Travel -->
+        <section class="use-case-section py-20 overflow-hidden">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="md:order-2 fade-in-section">
+                        <span class="text-sm font-bold text-amber-400 tracking-widest">TRAVEL</span>
+                        <h3 class="text-3xl font-bold mt-2 mb-4">Your Storyteller's Atlas</h3>
+                        <p class="text-slate-300 text-lg">Create a rich, multi-sensory travel journal. Geotag your voice notes and photos to build an interactive map of your adventures. Relive not just where you went, but how you felt in that exact moment.</p>
+                    </div>
+                    <div class="md:order-1 fade-in-section" style="transition-delay: 150ms;">
+                        <div class="glass-card rounded-2xl p-8 relative aspect-video bg-cover bg-center" style="background-image: url('https://placehold.co/600x400/050816/1f2937?text=')">
+                             <div class="absolute top-1/4 left-1/3">
+                                <div class="w-3 h-3 bg-amber-400 rounded-full animate-ping"></div>
+                                <div class="w-3 h-3 bg-amber-400 rounded-full absolute top-0 left-0"></div>
+                            </div>
+                            <div class="absolute top-1/2 left-3/4">
+                                <div class="w-3 h-3 bg-amber-400 rounded-full animate-ping"></div>
+                                <div class="w-3 h-3 bg-amber-400 rounded-full absolute top-0 left-0"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Case 5: Entertainment -->
+        <section class="use-case-section py-20 overflow-hidden">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="fade-in-section">
+                        <span class="text-sm font-bold text-rose-400 tracking-widest">ENTERTAINMENT</span>
+                        <h3 class="text-3xl font-bold mt-2 mb-4">Capture the Vibe</h3>
+                        <p class="text-slate-300 text-lg">Join a public "Memory Wall" at your next concert, festival, or game. Share your real-time reactions and contribute to a collective story of the event's atmosphere. A new way for fans to connect and sponsors to engage.</p>
+                    </div>
+                    <div class="fade-in-section" style="transition-delay: 150ms;">
+                        <div class="glass-card rounded-2xl p-6 -rotate-3">
+                            <div class="border-2 border-dashed border-slate-600 rounded-xl p-4 text-center">
+                                <p class="font-bold text-rose-400">LIVE EVENT</p>
+                                <h4 class="text-2xl font-extrabold text-white my-2">MUSIC FEST 2025</h4>
+                                <p class="text-sm text-slate-400">MEMORY WALL: ACTIVE</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Case 6: Saving Stories -->
+        <section class="use-case-section py-20 overflow-hidden">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="md:order-2 fade-in-section">
+                        <span class="text-sm font-bold text-cyan-400 tracking-widest">TIME CAPSULE</span>
+                        <h3 class="text-3xl font-bold mt-2 mb-4">A Message to the Future</h3>
+                        <p class="text-slate-300 text-lg">Record advice for your kids, a note to your future self, or a story you want a loved one to hear on a specific date. Lock your memory in a digital time capsule and we'll deliver it at the perfect moment.</p>
+                    </div>
+                    <div class="md:order-1 fade-in-section" style="transition-delay: 150ms;">
+                        <div class="glass-card rounded-2xl p-8 flex flex-col items-center text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.125-.504 1.125-1.125V14.25m-17.25 4.5v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A1.125 1.125 0 012.25 6h19.5a1.125 1.125 0 011.125 1.125v1.5a1.125 1.125 0 01-1.125 1.125h-1.5a3.375 3.375 0 00-3.375 3.375v1.875m-17.25 4.5a3.375 3.375 0 003.375-3.375h1.5a1.125 1.125 0 011.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125H3.375m17.25 0a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 00-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125h1.125" /></svg>
+                            <p class="mt-4 font-semibold text-white">To: Future Me</p>
+                            <p class="text-sm text-slate-400">Deliver on: July 13, 2030</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Case 7: Dreams -->
+        <section class="use-case-section py-20 overflow-hidden">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="fade-in-section">
+                        <span class="text-sm font-bold text-indigo-400 tracking-widest">DREAMS</span>
+                        <h3 class="text-3xl font-bold mt-2 mb-4">Journal Your Subconscious</h3>
+                        <p class="text-slate-300 text-lg">Capture fleeting dream memories the moment you wake up with instant voice recording. Our AI automatically transcribes and tags key themes, helping you discover patterns in your subconscious over time.</p>
+                    </div>
+                    <div class="fade-in-section" style="transition-delay: 150ms;">
+                        <div class="glass-card rounded-2xl p-8 relative overflow-hidden aspect-video">
+                            <!-- Starry background effect -->
+                            <div class="absolute inset-0" id="stars"></div>
+                            <div class="relative z-10">
+                                <p class="text-white">Dream Log: July 13, 2025</p>
+                                <p class="text-slate-300 italic mt-2">"...I was flying over an ocean of purple sand, and I saw a locked door floating in the sky..."</p>
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="bg-indigo-500/20 text-indigo-300 text-xs font-medium px-2.5 py-0.5 rounded-full">flying</span>
+                                    <span class="bg-indigo-500/20 text-indigo-300 text-xs font-medium px-2.5 py-0.5 rounded-full">ocean</span>
+                                    <span class="bg-indigo-500/20 text-indigo-300 text-xs font-medium px-2.5 py-0.5 rounded-full">anxiety</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA (Re-uses pricing section ID for navigation) -->
+        <section id="pricing" class="py-20">
             <div class="container mx-auto px-6 text-center fade-in-section">
                 <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Ready to Begin Your Story?</h2>
                 <p class="max-w-2xl mx-auto mt-4 text-slate-400 mb-8">
@@ -300,7 +319,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800">
+    <footer class="border-t border-slate-800 mt-20">
         <div class="container mx-auto px-6 py-8">
             <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                 <p class="text-slate-400">&copy; 2025 1Time.ai Inc. All rights reserved.</p>
@@ -312,7 +331,6 @@
             </div>
         </div>
     </footer>
-
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -330,36 +348,56 @@
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
-
-            function toggleMenu() {
-                mobileMenu.classList.toggle('translate-x-full');
+            function closeMenu() {
+                mobileMenu.classList.add('translate-x-full');
             }
-
-            mobileMenuButton.addEventListener('click', toggleMenu);
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', toggleMenu);
+            function openMenu() {
+                mobileMenu.classList.remove('translate-x-full');
+            }
+            mobileMenuButton.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('translate-x-full')) {
+                    openMenu();
+                } else {
+                    closeMenu();
+                }
             });
-
+            mobileMenuLinks.forEach(link => link.addEventListener('click', closeMenu));
 
             // --- Fade-in on Scroll Animation ---
             const sections = document.querySelectorAll('.fade-in-section');
-            const observer = new IntersectionObserver((entries, observer) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target);
                     }
                 });
-            }, {
-                rootMargin: '0px',
-                threshold: 0.1
-            });
+            }, { threshold: 0.1 });
+            sections.forEach(section => observer.observe(section));
 
-            sections.forEach(section => {
-                observer.observe(section);
-            });
+            // --- Starry background for Dreams section ---
+            const starsContainer = document.getElementById('stars');
+            if (starsContainer) {
+                for (let i = 0; i < 50; i++) {
+                    let star = document.createElement('div');
+                    star.className = 'absolute bg-white rounded-full';
+                    let size = Math.random() * 2 + 1;
+                    star.style.width = `${size}px`;
+                    star.style.height = `${size}px`;
+                    star.style.top = `${Math.random() * 100}%`;
+                    star.style.left = `${Math.random() * 100}%`;
+                    star.style.opacity = `${Math.random() * 0.5 + 0.2}`;
+                    star.style.animation = `twinkle ${Math.random() * 5 + 3}s infinite alternate`;
+                    starsContainer.appendChild(star);
+                }
+            }
         });
     </script>
+    <style>
+        @keyframes twinkle {
+            from { opacity: 0.2; }
+            to { opacity: 0.8; }
+        }
+    </style>
 
 </body>
 </html>
