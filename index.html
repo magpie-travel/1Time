@@ -405,9 +405,9 @@
                 <a href="#" class="logo">1Time<span class="logo-accent">.ai</span></a>
                 
                 <ul class="nav-links">
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="memories.html">Memories</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
                 </ul>
                 
                 <a href="#" class="cta-button">Get Started</a>
@@ -426,9 +426,9 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <button class="mobile-menu-close" id="mobileMenuClose">×</button>
-        <a href="#features">Features</a>
-        <a href="#about">About</a>
-        <a href="#pricing">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="memories.html">Memories</a>
+        <a href="pricing.html">Pricing</a>
         <a href="#" class="cta-button">Get Started</a>
     </div>
 
@@ -437,12 +437,12 @@
         <div class="container">
             <h1>Your Story, <span class="hero-accent">Forever.</span></h1>
             <p>Capture life's moments in your own voice. Create a timeless legacy for your family, friends, and future self.</p>
-            <a href="#features" class="hero-cta">Start Your Story</a>
+            <a href="#memories" class="hero-cta">Start Your Story</a>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
+    <!-- Memories Section -->
+    <section id="memories" class="features">
         <div class="container">
             <div class="features-header fade-in">
                 <h2>One Platform, Infinite Stories</h2>
@@ -528,8 +528,8 @@
             mobileMenu.classList.remove('active');
         });
 
-        // Close mobile menu when clicking on a link
-        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        // Close mobile menu when clicking on a link (except for external pages)
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a:not([href$=".html"])');
         mobileMenuLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('active');
