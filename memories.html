@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Types of Memories - 1Time.ai</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --border: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-accent {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .cta-button {
+            background: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* Page Header Section */
+        .page-header {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
+
+        .page-header h1 {
+            font-size: clamp(40px, 8vw, 60px);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+
+        .hero-accent {
+            background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-weight: 400;
+        }
+
+        /* Generic Section Styling */
+        .section {
+            padding: 80px 0;
+        }
+        .section-bg:nth-child(even) {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Memory Detail Section */
+        .memory-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+        .memory-content h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        .memory-content p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+        .memory-content ul {
+            list-style: none;
+            margin-top: 24px;
+        }
+        .memory-content ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+        }
+        .memory-content ul li svg {
+            flex-shrink: 0;
+            margin-top: 5px;
+            color: var(--accent);
+        }
+        .memory-image {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            object-fit: cover;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-content p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-links, .cta-button {
+                display: none;
+            }
+            .mobile-menu-button {
+                display: block;
+            }
+            .page-header {
+                padding: 100px 0 60px;
+            }
+            .memory-section {
+                grid-template-columns: 1fr;
+            }
+            .memory-image {
+                order: -1;
+                margin-bottom: 40px;
+            }
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: var(--bg-primary);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+            transition: right 0.3s ease-in-out;
+        }
+        .mobile-menu.active {
+            right: 0;
+        }
+        .mobile-menu a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 500;
+        }
+        .mobile-menu-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            border: none;
+            font-size: 32px;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo">1Time<span class="logo-accent">.ai</span></a>
+                
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="memories.html">Memories</a></li>
+                </ul>
+                
+                <a href="pricing.html" class="cta-button">Get Started</a>
+                
+                <button class="mobile-menu-button" id="mobileMenuButton">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">&times;</button>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="memories.html">Memories</a>
+        <a href="pricing.html" class="cta-button">Get Started</a>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container fade-in">
+            <h1>Every Memory <span class="hero-accent">Has a Home</span></h1>
+            <p>Your life isn't one-dimensional, and your memories shouldn't be either. Explore the different ways you can use 1Time.ai to capture the full spectrum of your experiences.</p>
+        </div>
+    </section>
+
+    <!-- Memory Type Sections -->
+    <div id="memory-types">
+        <!-- Legacy & Autobiography -->
+        <section class="section section-bg">
+            <div class="container">
+                <div class="memory-section">
+                    <div class="memory-content fade-in">
+                        <h2>For Your Legacy</h2>
+                        <p>This is the core of your story—the experiences, lessons, and wisdom that define you. Create a living autobiography that your family can interact with for generations, ensuring your voice is never lost.</p>
+                        <ul>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>The story of how you met your partner.</li>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Advice for your children or grandchildren on life's biggest challenges.</li>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>A memory of your own parents or grandparents.</li>
+                        </ul>
+                    </div>
+                    <div class="fade-in">
+                        <img src="https://placehold.co/600x500/e2e8f0/475569?text=Legacy" alt="A photo album and a pen" class="memory-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Friends Sharing -->
+        <section class="section">
+            <div class="container">
+                <div class="memory-section">
+                    <div class="fade-in" style="order: 2; text-align: right;">
+                        <img src="https://placehold.co/600x500/e2e8f0/475569?text=Friends" alt="A group of friends laughing" class="memory-image">
+                    </div>
+                    <div class="memory-content fade-in" style="order: 1;">
+                        <h2>For Your Friends</h2>
+                        <p>Some stories are best told together. Invite your friends to a shared memory and capture every perspective. Settle old debates and relive the moments that define your friendship.</p>
+                        <ul>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Recount a memorable night out from everyone's point of view.</li>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Create a collective memory of a favorite teacher or school event.</li>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Compile stories and inside jokes for a friend's milestone birthday.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Life Events -->
+        <section class="section section-bg">
+            <div class="container">
+                <div class="memory-section">
+                    <div class="memory-content fade-in">
+                        <h2>For Life's Big Events</h2>
+                        <p>Go beyond a traditional guestbook. At your next wedding, birthday, or anniversary, use a simple QR code to let guests leave heartfelt voice messages, creating an emotional audio-guestbook.</p>
+                        <ul>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Collect wedding day wishes and advice from guests.</li>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Create a "voicemail" playlist from a milestone birthday party.</li>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Capture congratulations and stories at a graduation celebration.</li>
+                        </ul>
+                    </div>
+                    <div class="fade-in">
+                        <img src="https://placehold.co/600x500/e2e8f0/475569?text=Events" alt="Celebration with confetti" class="memory-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Travel & Vacations -->
+        <section class="section">
+            <div class="container">
+                <div class="memory-section">
+                    <div class="fade-in" style="order: 2; text-align: right;">
+                        <img src="https://placehold.co/600x500/e2e8f0/475569?text=Travel" alt="A world map with pins" class="memory-image">
+                    </div>
+                    <div class="memory-content fade-in" style="order: 1;">
+                        <h2>For Your Travels</h2>
+                        <p>Build an interactive atlas of your adventures. Geotagging your voice notes and photos creates a rich, multi-sensory travel journal that captures the feeling of a place, not just the sights.</p>
+                        <ul>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Record the sounds of a bustling market in a foreign city.</li>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Tell the story of a meal that you'll never forget.</li>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Capture your thoughts while watching a sunset from a mountaintop.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Saving Stories -->
+        <section class="section section-bg">
+            <div class="container">
+                <div class="memory-section">
+                    <div class="memory-content fade-in">
+                        <h2>For Your Future Self</h2>
+                        <p>Lock your memories in a digital time capsule. Record a message for a future date—a note to your future self, advice for your kids when they turn 18, or a story you want a loved one to hear on a special day.</p>
+                        <ul>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Record your goals and fears at the start of a new chapter in your life.</li>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Create an annual "State of the Union" message about your life.</li>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Save a story for your child to listen to on their wedding day.</li>
+                        </ul>
+                    </div>
+                    <div class="fade-in">
+                        <img src="https://placehold.co/600x500/e2e8f0/475569?text=Time+Capsule" alt="An old-fashioned locked box" class="memory-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dreams -->
+        <section class="section">
+            <div class="container">
+                <div class="memory-section">
+                    <div class="fade-in" style="order: 2; text-align: right;">
+                        <img src="https://placehold.co/600x500/e2e8f0/475569?text=Dreams" alt="A starry night sky with clouds" class="memory-image">
+                    </div>
+                    <div class="memory-content fade-in" style="order: 1;">
+                        <h2>For Your Dreams</h2>
+                        <p>Your subconscious has stories to tell, too. Capture fleeting dream memories the moment you wake up with instant voice recording. Our AI helps you tag key themes and discover hidden patterns over time.</p>
+                        <ul>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Quickly log a vivid dream before the details fade away.</li>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Search for recurring symbols or feelings across all your dreams.</li>
+                            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>Keep a completely private journal of your inner world.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 1Time.ai Inc. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.add('active'));
+        mobileMenuClose.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        });
+
+        // Fade in animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 20) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = 'var(--shadow)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.8)';
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
