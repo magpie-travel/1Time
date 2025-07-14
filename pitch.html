@@ -1,116 +1,587 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1time.ai - Capture One Memory. Keep It Forever.</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f9f9f9;
-      color: #333;
-    }
-    header, section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    header {
-      background: #111;
-      color: #fff;
-      text-align: center;
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-    h2 {
-      font-size: 1.75rem;
-      margin-top: 40px;
-    }
-    p, li {
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-    ul {
-      padding-left: 20px;
-    }
-    footer {
-      background: #111;
-      color: #fff;
-      text-align: center;
-      padding: 30px 10px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Pitch - 1Time.ai</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #fafafa;
+            --bg-secondary: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --border: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(250, 250, 250, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-accent {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .cta-button {
+            background: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* Page Header Section */
+        .page-header {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #f8fafc 100%);
+        }
+
+        .page-header h1 {
+            font-size: clamp(40px, 8vw, 60px);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+
+        .hero-accent {
+            background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-weight: 400;
+        }
+
+        /* Pitch Content Styling */
+        .pitch-section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .pitch-section:last-child {
+            border-bottom: none;
+        }
+        .pitch-section h2 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 24px;
+        }
+        .pitch-section h3 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+        .pitch-section p, .pitch-section li {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        .pitch-section ul {
+            list-style-position: inside;
+            padding-left: 0;
+        }
+        .pitch-section ul li {
+            margin-bottom: 8px;
+        }
+        .card {
+            background: var(--bg-secondary);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            margin-top: 24px;
+        }
+        .grid {
+            display: grid;
+            gap: 24px;
+        }
+        .grid-2-col {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        .grid-3-col {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+        }
+        .table th, .table td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        .table th {
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        .timeline {
+            position: relative;
+            margin-top: 32px;
+        }
+        .timeline-item {
+            padding-left: 30px;
+            border-left: 2px solid var(--border);
+            padding-bottom: 40px;
+            position: relative;
+        }
+        .timeline-item:last-child {
+            border-left: 2px solid transparent;
+            padding-bottom: 0;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            border: 3px solid var(--bg-primary);
+        }
+        .team-member {
+            text-align: center;
+        }
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            object-fit: cover;
+            background-color: var(--border);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-links, .cta-button {
+                display: none;
+            }
+            .mobile-menu-button {
+                display: block;
+            }
+            .page-header {
+                padding: 100px 0 60px;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: var(--bg-primary);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+            transition: right 0.3s ease-in-out;
+        }
+        .mobile-menu.active {
+            right: 0;
+        }
+        .mobile-menu a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 500;
+        }
+        .mobile-menu-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            border: none;
+            font-size: 32px;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>1time.ai</h1>
-    <p>Capture One Memory. Keep It Forever.</p>
-  </header>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav">
+            <a href="index.html" class="logo">1Time<span class="logo-accent">.ai</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="memories.html">Memories</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+            </ul>
+            <a href="pricing.html" class="cta-button">Get Started</a>
+            <button class="mobile-menu-button" id="mobileMenuButton">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </header>
 
-  <section>
-    <h2>Problem</h2>
-    <ul>
-      <li>We forget 60% of life events in a year.</li>
-      <li>We rarely preserve stories or voices.</li>
-      <li>Memories fade, distort, and vanish.</li>
-      <li>We have trackers for steps — but not our most meaningful moments.</li>
-    </ul>
-  </section>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">&times;</button>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="memories.html">Memories</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="pricing.html" class="cta-button">Get Started</a>
+    </div>
 
-  <section>
-    <h2>Solution</h2>
-    <p>1time.ai helps people speak or write their memories, then turns them into narrated, shareable stories — saved forever in their own voice.</p>
-  </section>
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container fade-in">
+            <h1>The Pitch</h1>
+            <p>"Capture One Memory. <span class="hero-accent">Keep It Forever.</span>"</p>
+        </div>
+    </section>
 
-  <section>
-    <h2>Product Features</h2>
-    <ul>
-      <li>Memory capture (voice/text)</li>
-      <li>AI-generated storytelling</li>
-      <li>Voice narration (TTS & cloning)</li>
-      <li>Memory vaults and sharing</li>
-      <li>Time capsule delivery</li>
-      <li>Storybooks & tribute kits</li>
-    </ul>
-  </section>
+    <div class="container">
+        <!-- 1. Executive Summary -->
+        <section class="pitch-section fade-in">
+            <h2>1. Executive Summary</h2>
+            <p>1time.ai is a memory preservation platform powered by AI and voice synthesis. It allows users to capture personal stories and transform them into lasting digital memories — written, narrated, and emotionally rich. Our mission is to help people protect what matters most: the voices, stories, and relationships that define their lives.</p>
+            <p style="margin-top: 1rem;">We’re launching at the intersection of generative AI, digital legacy, and emotional storytelling — creating a brand-new consumer behavior around memory preservation and digital heirlooms.</p>
+        </section>
 
-  <section>
-    <h2>Business Model</h2>
-    <ul>
-      <li>Free to start with 1 memory</li>
-      <li>Subscription tiers ($5, $15, $30/month)</li>
-      <li>Revenue from memory books, tributes, and QR kits</li>
-      <li>Sponsored moments from brands like Expedia, EPL, and Hallmark</li>
-    </ul>
-  </section>
+        <!-- 2. Problem -->
+        <section class="pitch-section fade-in">
+            <h2>2. The Problem</h2>
+            <h3>We forget, distort, and delay capturing our most meaningful memories.</h3>
+            <ul>
+                <li><strong>Memory fade is rapid:</strong> 60% of life events are forgotten within a year.</li>
+                <li><strong>Each recall rewrites the memory:</strong> making it emotional but less accurate.</li>
+                <li><strong>We preserve photos, not stories:</strong> voices, context, and emotions are lost.</li>
+                <li><strong>When people pass away, their stories go with them</strong> — forever.</li>
+            </ul>
+        </section>
 
-  <section>
-    <h2>Go-To-Market</h2>
-    <ul>
-      <li>Viral product loops (share/gift a memory)</li>
-      <li>Influencer storytelling campaigns</li>
-      <li>Sponsored event activations</li>
-      <li>Partnerships with weddings, funerals, and therapy providers</li>
-    </ul>
-  </section>
+        <!-- 3. Solution -->
+        <section class="pitch-section fade-in">
+            <h2>3. The Solution</h2>
+            <h3>1time.ai enables users to save, narrate, and share real-life memories — in their own voice, or the voice of someone they love.</h3>
+            <div class="grid grid-2-col" style="margin-top: 24px;">
+                <div class="card">Voice journals for parents & families</div>
+                <div class="card">Tributes to loved ones after death</div>
+                <div class="card">Love stories & life milestones</div>
+                <div class="card">Travel memories and digital time capsules</div>
+            </div>
+        </section>
 
-  <section>
-    <h2>Vision</h2>
-    <p>A billion memories, beautifully remembered — 1time.ai is the world’s emotional memory vault.</p>
-    <p>“We don’t want your memories to go viral. We want them to outlive you.”</p>
-  </section>
+        <!-- 4. Product Features -->
+        <section class="pitch-section fade-in">
+            <h2>4. Product Roadmap</h2>
+            <div class="grid grid-3-col">
+                <div>
+                    <h3>✅ Core MVP</h3>
+                    <p>Record a memory via text or voice, turn it into a narrative story with default AI narration, and share privately.</p>
+                </div>
+                <div>
+                    <h3>🔜 Phase 2</h3>
+                    <p>Clone your own voice, choose story themes (tribute, letter), and schedule memories for future delivery.</p>
+                </div>
+                <div>
+                    <h3>🎯 Phase 3</h3>
+                    <p>Premium narration styles, family tree story connections, and AI-powered conversations with memory archives.</p>
+                </div>
+            </div>
+        </section>
 
-  <footer>
-    <p>&copy; 2025 1time.ai — All rights reserved</p>
-  </footer>
+        <!-- 5. Market Opportunity -->
+        <section class="pitch-section fade-in">
+            <h2>5. Market Opportunity</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Market Segment</th>
+                        <th style="text-align: right;">Total Addressable Market (TAM)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Digital Storytelling & Journaling</td>
+                        <td style="text-align: right;">$15B</td>
+                    </tr>
+                    <tr>
+                        <td>Grief Tech & End-of-Life Services</td>
+                        <td style="text-align: right;">$10B</td>
+                    </tr>
+                    <tr>
+                        <td>Voice AI Platforms</td>
+                        <td style="text-align: right;">$20B+</td>
+                    </tr>
+                    <tr>
+                        <td>Legacy Planning & Estate Tools</td>
+                        <td style="text-align: right;">$12B</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
-  <script>
-    // Placeholder for future interactivity (e.g., memory prompts, voice preview)
-    console.log("1time.ai - Memory starts here.");
-  </script>
+        <!-- 6. Business Model -->
+        <section class="pitch-section fade-in">
+            <h2>6. Business Model</h2>
+            <h3>Subscription Tiers & Add-Ons</h3>
+            <div class="grid grid-2-col">
+                <div class="card">
+                    <h4>Subscriptions</h4>
+                    <p>A freemium model with tiered plans (Core, Voice+, Legacy) offering progressively powerful features like unlimited memories, voice cloning, and AI-narrated books.</p>
+                </div>
+                <div class="card">
+                    <h4>Add-Ons & Partnerships</h4>
+                    <p>One-time purchases like printed memory books and QR memory cards for events. White-label bundles for partners in the funeral, wedding, and therapy industries.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Go-To-Market -->
+        <section class="pitch-section fade-in">
+            <h2>7. Go-To-Market Strategy</h2>
+            <div class="grid grid-3-col">
+                <div>
+                    <h3>🌀 Viral Hooks</h3>
+                    <p>Every memory is a shareable prompt, inviting new users to contribute their perspective.</p>
+                </div>
+                <div>
+                    <h3>🎥 Creator Campaigns</h3>
+                    <p>Partnering with influencers on TikTok and Instagram for authentic storytelling challenges.</p>
+                </div>
+                <div>
+                    <h3>🤝 B2B2C Partnerships</h3>
+                    <p>Integrating with funeral homes, wedding planners, and therapists to reach users at key life moments.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Team -->
+        <section class="pitch-section fade-in">
+            <h2>8. The Team</h2>
+            <div class="grid grid-3-col">
+                <div class="team-member">
+                    <img src="https://placehold.co/120x120/e2e8f0/64748b?text=CW" alt="Christian Watts">
+                    <h3>Christian Watts</h3>
+                    <p>CEO, Founder of Magpie, 20+ years in travel and memory-tech.</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://placehold.co/120x120/e2e8f0/64748b?text=CTO" alt="CTO">
+                    <h3>[CTO Name]</h3>
+                    <p>AI + Voice Engineering lead, deep background in voice synthesis and LLMs.</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://placehold.co/120x120/e2e8f0/64748b?text=CMO" alt="CMO">
+                    <h3>[CMO Name]</h3>
+                    <p>Growth & Brand expert, scaled emotional products with creators & brands.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Milestones -->
+        <section class="pitch-section fade-in">
+            <h2>9. Milestones & Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3>Q3 2025</h3>
+                    <p>MVP Launch: Voice-to-text, story generation, and standard TTS playback.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3>Q4 2025</h3>
+                    <p>Voice Cloning & Premium Subscriptions: Users can clone their voice for narration.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3>Q1 2026</h3>
+                    <p>Partnerships Live: In-market with funeral homes, wedding planners, and sponsored events.</p>
+                </div>
+                 <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3>Q2 2026</h3>
+                    <p>Physical Products: Launch of AI-narrated memory books and family tree sharing.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Vision -->
+        <section class="pitch-section fade-in">
+            <h2>10. Our Vision</h2>
+            <h3>A future where every person has a digital memory vault — one that can speak, comfort, and connect across generations.</h3>
+            <p style="text-align: center; font-size: 20px; font-style: italic; margin-top: 32px; color: var(--text-primary);">“We don’t want your memories to go viral. We want them to outlive you.”</p>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" style="margin-top: 60px;">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 1Time.ai Inc. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.add('active'));
+        mobileMenuClose.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        });
+
+        // Fade in animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 20) {
+                header.style.background = 'rgba(250, 250, 250, 0.95)';
+                header.style.boxShadow = 'var(--shadow)';
+            } else {
+                header.style.background = 'rgba(250, 250, 250, 0.8)';
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
