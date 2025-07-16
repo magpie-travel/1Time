@@ -1,0 +1,511 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1Time.ai Web App</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --text-muted: #9ca3af;
+            --accent: #6d28d9;
+            --accent-light: #ede9fe;
+            --accent-text: #5b21b6;
+            --border: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .app-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--bg-secondary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Header */
+        .app-header {
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            background-color: var(--bg-secondary);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .logo span {
+            color: var(--accent);
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: var(--text-secondary);
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 24px;
+            flex-grow: 1;
+        }
+
+        /* Search & Filters */
+        .search-bar {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+        .filter-pills {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .filter-pill {
+            background-color: var(--accent-light);
+            color: var(--accent-text);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .filter-pill.active {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        /* Feed View */
+        .memory-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        .memory-card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .memory-card-body {
+            padding: 20px;
+        }
+        .memory-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .memory-card-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .memory-card-tag {
+            background-color: #f3f4f6;
+            color: #4b5563;
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .memory-card-content {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        .memory-card-footer {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        .shared-with-avatars {
+            display: flex;
+            align-items: center;
+        }
+        .shared-with-avatars img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin-left: -8px;
+        }
+        .shared-with-avatars .avatar-more {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #e5e7eb;
+            color: #4b5563;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            border: 2px solid white;
+            margin-left: -8px;
+        }
+
+        /* Create New Memory View */
+        .breadcrumb {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: var(--accent);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .form-group {
+            margin-bottom: 24px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+        }
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .action-buttons button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background-color: var(--bg-secondary);
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .save-button {
+            width: 100%;
+            background-color: var(--accent);
+            color: white;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 24px;
+        }
+        
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 80px;
+            right: calc(50% - 350px); /* Adjust based on app-container width */
+            background-color: var(--accent);
+            color: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .fab:hover {
+            transform: scale(1.05);
+        }
+        @media (max-width: 800px) {
+            .fab {
+                right: 24px;
+            }
+        }
+
+
+        /* Bottom Nav */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            border-top: 1px solid var(--border);
+            background-color: var(--bg-secondary);
+            position: sticky;
+            bottom: 0;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .nav-item.active {
+            color: var(--accent);
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- App Header -->
+        <header class="app-header">
+            <h1 class="logo">1Time<span>.ai</span></h1>
+            <div class="header-actions">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+        </header>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- VIEW 1: MEMORY FEED -->
+            <div id="feed-view">
+                <input type="text" class="search-bar" placeholder="Search your memories...">
+                <div class="filter-pills">
+                    <div class="filter-pill active">All</div>
+                    <div class="filter-pill">My Memories</div>
+                    <div class="filter-pill">Shared with Me</div>
+                </div>
+
+                <div id="memory-feed-content">
+                    <!-- Memory cards will be injected here by JavaScript -->
+                </div>
+                
+                <button class="fab" id="show-create-btn" title="Create New Memory">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
+            </div>
+
+            <!-- VIEW 2: CREATE NEW MEMORY -->
+            <div id="create-view" style="display: none;">
+                <a href="#" id="back-to-feed-btn" class="breadcrumb">&larr; Back to Memories</a>
+                
+                <div class="form-group">
+                    <label>Start with a Photo or Recording</label>
+                    <div class="action-buttons">
+                        <button>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                            Add Photo
+                        </button>
+                        <button>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line></svg>
+                            Record Audio
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="memory-body">Your Memory</label>
+                    <textarea id="memory-body" placeholder="What's on your mind? Start typing..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="memory-title">Title</label>
+                    <input type="text" id="memory-title" placeholder="Give your memory a title (optional)">
+                </div>
+
+                <div class="form-group">
+                    <label>Add more details</label>
+                    <div class="action-buttons">
+                        <button>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Add Location
+                        </button>
+                        <button>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+                            Share With...
+                        </button>
+                    </div>
+                </div>
+                
+                <button class="save-button">Save Memory</button>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item active">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                Timeline
+            </a>
+            <a href="#" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                Search
+            </a>
+            <a href="#" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                Shared
+            </a>
+            <a href="#" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                Prompts
+            </a>
+            <a href="#" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                Profile
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const feedView = document.getElementById('feed-view');
+            const createView = document.getElementById('create-view');
+            const showCreateBtn = document.getElementById('show-create-btn');
+            const backToFeedBtn = document.getElementById('back-to-feed-btn');
+            const memoryFeedContent = document.getElementById('memory-feed-content');
+
+            // --- Sample Data for the Feed ---
+            const memories = [
+                {
+                    title: "Our Wedding Day",
+                    date: "July 12, 2024",
+                    content: "It was a perfect summer day. I remember seeing you walk down the aisle and feeling like the luckiest person alive. The speeches were hilarious...",
+                    tags: ["Shared Memory"],
+                    location: "Florence, Italy",
+                    imageUrl: null, // Removed image
+                    sharedWith: ["A", "B", "C", "D"]
+                },
+                {
+                    title: "College Road Trip",
+                    date: "June 5, 2023",
+                    content: "Mike swears we got lost because of my navigation, but we all know it was because he refused to ask for directions. We ended up finding the best tacos I've ever had...",
+                    tags: ["My Memory"],
+                    location: "Tijuana, Mexico",
+                    imageUrl: null,
+                    sharedWith: []
+                },
+                {
+                    title: "That one concert...",
+                    date: "April 15, 2024",
+                    content: "The energy of the crowd during the encore was electric. Everyone was singing along, and for a few minutes, it felt like we were all connected. I'll never forget that feeling.",
+                    tags: ["My Memory"],
+                    location: "The Fillmore, San Francisco",
+                    imageUrl: null, // Removed image
+                    sharedWith: []
+                },
+                {
+                    title: "Grandma's Advice",
+                    date: "January 2, 2024",
+                    content: "She always said, 'Don't sweat the small stuff, and it's almost all small stuff.' It took me years to understand what she meant, but now it's something I try to live by every single day.",
+                    tags: ["Shared Memory"],
+                    location: null,
+                    imageUrl: null,
+                    sharedWith: ["A"]
+                }
+            ];
+
+            // --- Function to render the feed ---
+            function renderFeed() {
+                memoryFeedContent.innerHTML = ''; // Clear existing feed
+                memories.forEach(memory => {
+                    const card = document.createElement('div');
+                    card.className = 'memory-card';
+                    
+                    let imageHtml = memory.imageUrl ? `<img class="memory-card-image" src="${memory.imageUrl}" alt="Memory image">` : '';
+                    
+                    let tagHtml = memory.tags.map(tag => `<span class="memory-card-tag">${tag}</span>`).join('');
+                    
+                    let footerHtml = '';
+                    if (memory.location || memory.sharedWith.length > 0) {
+                        let locationHtml = memory.location ? `<span>📍 ${memory.location}</span>` : '';
+                        let sharedHtml = '';
+                        if (memory.sharedWith.length > 0) {
+                            sharedHtml = `
+                                <div class="shared-with-avatars">
+                                    ${memory.sharedWith.slice(0, 2).map(p => `<img src="https://placehold.co/50x50/38bdf8/ffffff?text=${p}" alt="Avatar">`).join('')}
+                                    ${memory.sharedWith.length > 2 ? `<div class="avatar-more">+${memory.sharedWith.length - 2}</div>` : ''}
+                                </div>
+                            `;
+                        }
+                        footerHtml = `<div class="memory-card-footer">${locationHtml}${sharedHtml}</div>`;
+                    }
+
+                    card.innerHTML = `
+                        ${imageHtml}
+                        <div class="memory-card-body">
+                            <div class="memory-card-header">
+                                <h3>${memory.title}</h3>
+                                ${tagHtml}
+                            </div>
+                            <p class="memory-card-content">${memory.content}</p>
+                            ${footerHtml}
+                        </div>
+                    `;
+                    memoryFeedContent.appendChild(card);
+                });
+            }
+
+            // --- Navigation Logic ---
+            function showFeed() {
+                feedView.style.display = 'block';
+                createView.style.display = 'none';
+            }
+
+            function showCreate() {
+                feedView.style.display = 'none';
+                createView.style.display = 'block';
+            }
+
+            showCreateBtn.addEventListener('click', showCreate);
+            backToFeedBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showFeed();
+            });
+
+            // Initial render
+            renderFeed();
+            showFeed();
+        });
+    </script>
+
+</body>
+</html>
